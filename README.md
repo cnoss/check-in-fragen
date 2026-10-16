@@ -3,25 +3,19 @@
 Check-in-Fragen zum Durchwischen auf dem Smartphone – für Lehrveranstaltungen, Workshops und Meetings.
 Funktioniert als Progressive Web App: auf den Homescreen legen, läuft dann auch offline.
 
+Die Seite ist eine schlichte Jekyll-Seite und wird direkt von GitHub Pages gebaut – kein Build-Schritt, keine Abhängigkeiten.
+
 ## Fragen hinzufügen
 
-**Schnell:** Fragen als beliebige Datei in `inbox/` legen und später einsortieren (lassen).
-
-**Direkt:** Einen Listenpunkt in der passenden Datei in `stacks/` ergänzen.
+**Direkt (auch im GitHub-Webeditor):** Einen Listenpunkt in der passenden Datei in `_stacks/` ergänzen.
 Jeder Listenpunkt ist eine Karte. Im Frontmatter stehen Titel, Beschreibung,
-die Maximalzahl an Fragen (`max`), Tags und die Position in der Übersicht.
+die Maximalzahl an Fragen (`max`), Tags und die Position in der Übersicht (`reihenfolge`).
 
-Tags (festes Set): `leicht`, `persönlich`, `kennenlernen`, `laufende-gruppe`.
+**Gesammelt:** Fragen als beliebige Datei in `inbox/` legen und später einsortieren lassen.
 
-## Lokal
+Tags (festes Set, in `_config.yml`): `leicht`, `persönlich`, `kennenlernen`, `laufende-gruppe`.
 
-```sh
-npm run dev
-```
+## Einrichten
 
-Öffnet unter http://localhost:8000. Braucht nur Node. Die Konsole zeigt auch eine URL fürs Smartphone im selben WLAN.
-
-## Deployment
-
-Push auf `main` → GitHub Action baut `questions.json` und deployt `site/` auf GitHub Pages.
-Einmalig im Repo unter *Settings → Pages → Source* „GitHub Actions“ auswählen.
+Einmalig im Repo unter *Settings → Pages*: Source „Deploy from a branch“, Branch `main`, Ordner `/ (root)`.
+Danach baut GitHub Pages die Seite bei jedem Push neu.

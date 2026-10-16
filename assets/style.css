@@ -1,0 +1,197 @@
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --text: #1b1b1d;
+  --muted: #6b6a66;
+  --line: #e2dfd7;
+  --accent: #d9502f;
+  --accent-text: #ffffff;
+  --radius: 14px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1b1d;
+    --surface: #26262a;
+    --text: #f1efe9;
+    --muted: #9c9a94;
+    --line: #36363b;
+    --accent: #f06c4a;
+    --accent-text: #1b1b1d;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+.view {
+  min-height: 100dvh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  display: flex;
+  flex-direction: column;
+}
+.view[hidden] { display: none; }
+
+/* Kopfzeile */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+}
+.bar h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.back {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0 8px 4px 0;
+}
+
+/* Tag-Filter */
+.tags {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+.tags button {
+  flex: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+}
+.tags button[aria-pressed="true"] {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.random {
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+/* Stack-Liste */
+.stacks {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 24px;
+  display: grid;
+  gap: 10px;
+}
+.stacks a {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  color: inherit;
+  text-decoration: none;
+}
+.stacks .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.stacks strong { font-size: 1.1rem; }
+.stacks .count { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+.stacks p { margin: 2px 0 0; color: var(--muted); font-size: 0.95rem; }
+.stacks .empty { color: var(--muted); text-align: center; padding: 24px 0; }
+
+/* Mischen-Schalter */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  user-select: none;
+}
+.toggle input { accent-color: var(--accent); width: 18px; height: 18px; }
+
+/* Karte */
+.deck {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  overflow: hidden;
+}
+.card {
+  width: 100%;
+  min-height: 55dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 32px 24px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.06);
+  user-select: none;
+  will-change: transform;
+}
+.card p {
+  margin: 0;
+  font-size: clamp(1.6rem, 7vw, 2.6rem);
+  line-height: 1.25;
+  font-weight: 650;
+  text-align: center;
+  text-wrap: balance;
+}
+.card.animate { transition: transform 0.2s ease, opacity 0.2s ease; }
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 24px;
+}
+.controls button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 2rem;
+  line-height: 1;
+}
+.controls button:disabled { opacity: 0.35; cursor: default; }
+#counter { color: var(--muted); font-variant-numeric: tabular-nums; }

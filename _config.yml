@@ -1,0 +1,14 @@
+title: Check-in
+lang: de
+
+# Festes Tag-Set für die Stacks
+stack_tags: [leicht, persönlich, kennenlernen, laufende-gruppe]
+
+collections:
+  stacks:
+    output: false
+
+exclude:
+  - inbox
+  - CLAUDE.md
+  - README.md

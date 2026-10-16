@@ -1,0 +1,62 @@
+---
+---
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Check-in</title>
+  <meta name="description" content="Check-in-Fragen für Lehrveranstaltungen und Workshops">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1b1b1d" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <!-- Übersicht -->
+  <main id="view-list" class="view" hidden>
+    <header class="bar">
+      <h1>Check-in</h1>
+    </header>
+    <nav class="tags" id="tags" aria-label="Nach Tag filtern"></nav>
+    <button class="random" id="random">Zufällige Fragen aus allen Stacks</button>
+    <ul class="stacks" id="stacks"></ul>
+  </main>
+
+  <!-- Karten -->
+  <main id="view-cards" class="view" hidden>
+    <header class="bar">
+      <a href="#/" class="back" aria-label="Zurück zur Übersicht">‹</a>
+      <h1 id="cards-title"></h1>
+      <label class="toggle">
+        <input type="checkbox" id="shuffle">
+        <span>Mischen</span>
+      </label>
+    </header>
+    <section class="deck" id="deck" aria-live="polite">
+      <article class="card" id="card"><p id="card-text"></p></article>
+    </section>
+    <footer class="controls">
+      <button id="prev" aria-label="Vorherige Frage">‹</button>
+      <span id="counter"></span>
+      <button id="next" aria-label="Nächste Frage">›</button>
+    </footer>
+  </main>
+
+  <!-- Daten: aus _stacks/*.md von Jekyll erzeugt -->
+  <template id="data" data-tags="{{ site.stack_tags | join: ',' }}">
+    {%- assign stacks = site.stacks | sort: "reihenfolge" -%}
+    {%- for stack in stacks %}
+    <section data-slug="{{ stack.slug }}" data-titel="{{ stack.titel | escape }}" data-beschreibung="{{ stack.beschreibung | escape }}" data-tags="{{ stack.tags | join: ',' }}">
+      {{ stack.content | markdownify }}
+    </section>
+    {%- endfor %}
+  </template>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
